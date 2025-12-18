@@ -1,50 +1,36 @@
+import { useEffect, useState } from 'react';
 import VideoCard from '../../shared/ui/video-card/VideoCard';
+import axios from 'axios';
+import { getVideoUrl } from '../../features/api';
+import { formatVideoData } from '../../features/converters/format-video';
+import Button from '../../shared/ui/button';
 
 const VideoContainer = () => {
+
+  const [videos, setVideos] = useState([]);
+  const [nextPageToken, setNextPageToken] = useState('');
+
+  const fetchVideos = async () => {
+    const response = await axios.get(getVideoUrl(nextPageToken));
+
+    setNextPageToken(response.data.nextPageToken);
+
+    setVideos((prevVideos) => [...prevVideos, ...response.data.items.map(formatVideoData)]);
+  };
+
+  useEffect(() => {
+    fetchVideos();
+  }, []);
+
   return (
     <main className="pb-5 mx-auto px-4 max-w-screen-2xl">
       <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-3">
-        <VideoCard
-          title="Video 1"
-          channelName="Channel 1"
-          views={100}
-          image="https://via.placeholder.com/150"
-          createdAt="2021-01-01"
-          time="10:00"
-        />
-        <VideoCard
-          title="Video 1"
-          channelName="Channel 1"
-          views={100}
-          image="https://via.placeholder.com/150"
-          createdAt="2021-01-01"
-          time="10:00"
-        />
-        <VideoCard
-          title="Video 1"
-          channelName="Channel 1"
-          views={100}
-          image="https://via.placeholder.com/150"
-          createdAt="2021-01-01"
-          time="10:00"
-        />
-        <VideoCard
-          title="Video 1"
-          channelName="Channel 1"
-          views={100}
-          image="https://via.placeholder.com/150"
-          createdAt="2021-01-01"
-          time="10:00"
-        />
-        <VideoCard
-          title="Video 1"
-          channelName="Channel 1"
-          views={100}
-          image="https://via.placeholder.com/150"
-          createdAt="2021-01-01"
-          time="10:00"
-        />
+        {videos.map((video) => (
+          <VideoCard key={video.videoWatchUrl} {...video} />
+        ))}
+        
       </div>
+      <Button onClick={fetchVideos}>Load more</Button>
     </main>
   );
 };
