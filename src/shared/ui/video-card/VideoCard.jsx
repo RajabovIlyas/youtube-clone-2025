@@ -1,10 +1,11 @@
+import { Link } from "react-router";
 import ChannelImage from "../ChannelImage";
 
 const VideoCard = ({videoWatchUrl, img, title, channelName, views, publishedAt, time, channelId, channelImg }) => {
     return (
         <div className="video-card-container">
       <div className="video-card_img-box">
-        <a href={videoWatchUrl}>
+        <Link to={videoWatchUrl}>
           <img
             src={img}
             className="video-card_img"
@@ -14,7 +15,7 @@ const VideoCard = ({videoWatchUrl, img, title, channelName, views, publishedAt, 
           <div className="video-card_img-time-box">
             <span className="video-card_img-time">{time}</span>
           </div>
-        </a>
+        </Link>
       </div>
       <div className="flex gap-2">
         <div className="min-w-10">
@@ -24,7 +25,7 @@ const VideoCard = ({videoWatchUrl, img, title, channelName, views, publishedAt, 
             channelImg={channelImg}
           />
         </div>
-        <a href={videoWatchUrl}>
+        <Link to={videoWatchUrl}>
           <div className="video-card_description">
             <p className="line-clamp-2 font-bold">{title}</p>
             <p className="video-card_channel-title">{channelName}</p>
@@ -34,7 +35,7 @@ const VideoCard = ({videoWatchUrl, img, title, channelName, views, publishedAt, 
               <span className="video-card_publish">{publishedAt}</span>
             </div>
           </div>
-        </a>
+        </Link>
       </div>
     </div>
     )

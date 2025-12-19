@@ -1,10 +1,15 @@
 import './App.css';
 import './video-card.css';
 import './channel-image.css';
-import MainPage from '../pages/main-page';
+import { RouterProvider } from 'react-router';
+import { router } from '../features/routers/route';
 
 const App = () => {
-  return <MainPage />;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 };
 
 export default App;

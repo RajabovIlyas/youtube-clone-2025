@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import Button from '../../shared/ui/button';
 import AccountIcon from '../../shared/ui/icons/AccountIcon';
 import MicrofonIcon from '../../shared/ui/icons/MicrofonIcon';
@@ -8,9 +9,9 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center px-4">
       <div>
-        <a className="p-4 flex items-center gap-2">
+        <Link to="/" className="p-4 flex items-center gap-2">
           <YoutubeIcon className="w-8 h-8" /> Youtube
-        </a>
+        </Link>
       </div>
       <div className="hidden md:flex items-center  gap-4">
         <div className="flex items-center ">
